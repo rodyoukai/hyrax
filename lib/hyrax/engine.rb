@@ -69,7 +69,7 @@ module Hyrax
       require 'power_converters'
       require 'dry/struct'
       require 'dry/equalizer'
-      require 'dry/validation'
+      require 'valkyrie'
     end
 
     initializer 'routing' do
