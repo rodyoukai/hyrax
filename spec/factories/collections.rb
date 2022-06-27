@@ -127,7 +127,7 @@ FactoryBot.define do
     end
 
     after(:create) do |collection, _evaluator|
-      collection.reset_access_controls!
+      Hyrax::PermissionTemplate.reset_access_controls_for(collection: collection)
     end
 
     factory :public_collection_lw, traits: [:public_lw]
