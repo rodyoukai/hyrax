@@ -225,6 +225,9 @@ fcrepo:
 
 memcached:
   enabled: false
+  image:
+    repository: bitnami/memcached
+    tag: 1.6.15-debian-11-r12
 
 minio:
   enabled: false
