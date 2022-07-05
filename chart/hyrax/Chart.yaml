@@ -3,10 +3,10 @@ name: hyrax
 description: An open-source, Samvera-powered digital repository system
 type: application
 version: 2.0.0
-appVersion: 3.3.0
+appVersion: 3.4.1
 dependencies:
   - name: fcrepo
-    version: 0.8.0
+    version: 1.0.0
     repository: oci://ghcr.io/samvera
     condition: fcrepo.enabled
   - name: memcached
