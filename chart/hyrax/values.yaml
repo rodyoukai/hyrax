@@ -222,7 +222,7 @@ fcrepo:
     enabled: false
     image:
       repository: bitnami/postgresql
-      tag: 12.3.0
+      tag: 14.4.0-debian-11-r6
 
 memcached:
   enabled: false
