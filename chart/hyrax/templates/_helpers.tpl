@@ -153,7 +153,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 
 {{- define "hyrax.solr.username" -}}
 {{- if .Values.solr.enabled }}
-{{- .Values.solr.authentication.adminUsername }}
+{{- .Values.solr.auth.adminUsername }}
 {{- else }}
 {{- .Values.externalSolrUser }}
 {{- end }}
@@ -161,14 +161,22 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 
 {{- define "hyrax.solr.password" -}}
 {{- if .Values.solr.enabled }}
-{{- .Values.solr.authentication.adminPassword }}
+{{- .Values.solr.auth.adminPassword }}
 {{- else }}
 {{- .Values.externalSolrPassword }}
 {{- end }}
 {{- end -}}
 
+{{- define "hyrax.solr.port" -}}
+{{- if .Values.solr.enabled }}
+{{- .Values.solr.containerPorts.http | default 8983 }}
+{{- else }}
+{{- .Values.externalSolrPort }}
+{{- end }}
+{{- end -}}
+
 {{- define "hyrax.solr.url" -}}
-{{- printf "http://%s:%s@%s:%s/solr/%s" (include "hyrax.solr.username" .) (include "hyrax.solr.password" .) (include "hyrax.solr.host" .) "8983" (include "hyrax.solr.collectionName" .)  -}}
+{{- printf "http://%s:%s@%s:%s/solr/%s" (include "hyrax.solr.username" .) (include "hyrax.solr.password" .) (include "hyrax.solr.host" .) (include "hyrax.solr.port" .) (include "hyrax.solr.collectionName" .)  -}}
 {{- end -}}
 
 {{- define "hyrax.zk.fullname" -}}
