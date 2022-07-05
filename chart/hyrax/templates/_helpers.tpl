@@ -100,7 +100,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 
 {{- define "hyrax.postgresql.database" -}}
 {{- if .Values.postgresql.enabled }}
-{{- .Values.postgresql.postgresqlDatabase }}
+{{- .Values.postgresql.auth.database }}
 {{- else }}
 {{- .Values.externalPostgresql.database | default ( include "hyrax.fullname" . ) }}
 {{- end }}
@@ -108,7 +108,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 
 {{- define "hyrax.postgresql.username" -}}
 {{- if .Values.postgresql.enabled }}
-{{- .Values.postgresql.postgresqlUsername }}
+{{- .Values.postgresql.auth.username }}
 {{- else }}
 {{- .Values.externalPostgresql.username | default "postgres" }}
 {{- end }}
@@ -116,10 +116,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 
 {{- define "hyrax.postgresql.password" -}}
 {{- if .Values.postgresql.enabled }}
-{{- .Values.postgresql.postgresqlPassword }}
+{{- .Values.postgresql.auth.password }}
 {{- else }}
 {{- .Values.externalPostgresql.password }}
 {{- end }}
+{{- end -}}
+
+{{- define "hyrax.postgresql.url" -}}
+{{- printf "postgresql://%s:%s@%s/%s?pool=5" ( include "hyrax.postgresql.username" . ) ( include "hyrax.postgresql.password" . ) ( include "hyrax.postgresql.host" . ) ( include "hyrax.postgresql.database" . ) -}}
 {{- end -}}
 
 {{- define "hyrax.redis.fullname" -}}
