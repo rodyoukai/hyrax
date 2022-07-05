@@ -180,7 +180,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{- define "hyrax.redis.url" -}}
-{{- printf "redis://:%s@%s:%s" .Values.redis.password (include "hyrax.redis.host" .) "6379/0" -}}
+{{- printf "redis://:%s@%s:%s" .Values.redis.auth.password (include "hyrax.redis.host" .) "6379/0" -}}
 {{- end -}}
 
 {{- define "hyrax.nginx.host" -}}
